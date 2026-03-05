@@ -226,7 +226,7 @@ Quick-reply chips appear on first open for the most common topics.
 **Gaurav Kumar**
 
 - GitHub: [@ARtoRiAs10](https://github.com/ARtoRiAs10)
-- LinkedIn: [chhatrapati-sahu](https://www.linkedin.com/in/gaurav-kumar-96a16b232/)
+- LinkedIn: [Gaurav Kumar](https://www.linkedin.com/in/gaurav-kumar-96a16b232/)
 
 ---
 
