@@ -1,0 +1,253 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .show-hero-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+  .wishlist-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .wishlist-btn:hover { transform: scale(1.1); }
+  .wishlist-btn.wishlisted { color: #6C63FF; }
+  .wishlist-btn:not(.wishlisted) { color: #ccc; }
+  .listing-title { font-size: 1.8rem; font-weight: 700; }
+  .info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 4px 4px 4px 0;
+    font-size: 0.9rem;
+  }
+  .booking-box {
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 80px;
+  }
+  .booking-box .price { font-size: 1.6rem; font-weight: 700; }
+  .booking-box input, .booking-box select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  .btn-book {
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem;
+    font-weight: 600;
+    font-size: 1rem;
+    width: 100%;
+    transition: opacity 0.2s;
+  }
+  .btn-book:hover { opacity: 0.9; color: white; }
+  .review-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="container mt-4">
+  <div class="row g-4">
+    <!-- LEFT COLUMN -->
+    <div class="col-lg-7">
+      <h1 class="listing-title mb-1"><%= listing.title %></h1>
+      <p class="text-muted mb-3">
+        <i class="fa-solid fa-location-dot me-1.text-primary-violet"></i>
+        <%= listing.location %>, <%= listing.country %>
+        &nbsp;·&nbsp;
+        <span class="badge bg-secondary"><%= listing.category %></span>
+      </p>
+
+      <div class="position-relative mb-3">
+        <img src="<%= listing.image.url %>" class="show-hero-img" alt="<%= listing.title %>" />
+        <% if (currUser) { %>
+          <form method="POST" action="/wishlist/<%= listing._id %>" style="display:inline;">
+            <button class="wishlist-btn <%= wishlisted ? 'wishlisted' : '' %>">
+              <i class="<%= wishlisted ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+            </button>
+          </form>
+        <% } %>
+      </div>
+
+      <div class="mb-3">
+        <span class="info-badge"><i class="fa-solid fa-user text-muted"></i> Hosted by @<%= listing.owner.username %></span>
+        <span class="info-badge"><i class="fa-solid fa-tag.text-primary-violet"></i> &#8377;<%= listing.price.toLocaleString("en-IN") %>/night</span>
+      </div>
+      <hr />
+      <h5 class="fw-bold">About this place</h5>
+      <p class="text-muted"><%= listing.description %></p>
+
+      <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+        <hr />
+        <div class="d-flex gap-2">
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-warning">
+            <i class="fa-solid fa-pen me-1"></i> Edit
+          </a>
+          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Delete this listing?');">
+            <button class="btn btn-outline-danger"><i class="fa-solid fa-trash me-1"></i> Delete</button>
+          </form>
+        </div>
+      <% } %>
+
+      <hr />
+      <% if (currUser) { %>
+        <h5 class="fw-bold">Leave a Review</h5>
+        <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate class="needs-validation mb-4">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Rating</label>
+            <fieldset class="starability-slot">
+              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+              <input type="radio" id="first-rate1" name="review[rating]" value="1" /><label for="first-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="first-rate2" name="review[rating]" value="2" /><label for="first-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="first-rate3" name="review[rating]" value="3" /><label for="first-rate3" title="Average">3 stars</label>
+              <input type="radio" id="first-rate4" name="review[rating]" value="4" /><label for="first-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="first-rate5" name="review[rating]" value="5" /><label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="comment">Comment</label>
+            <textarea required class="form-control" name="review[comment]" id="comment" rows="3" placeholder="Share your experience..."></textarea>
+            <div class="invalid-feedback">Please add some comments</div>
+          </div>
+          <button class="btn btn-dark">Submit Review</button>
+        </form>
+      <% } %>
+
+      <% if (listing.reviews.length > 0) { %>
+        <h5 class="fw-bold mb-3">All Reviews (<%= listing.reviews.length %>)</h5>
+        <div class="row">
+          <% for (let review of listing.reviews) { %>
+            <div class="col-sm-6 mb-3">
+              <div class="card review-card">
+                <div class="card-body">
+                  <h6 class="fw-bold mb-1">@<%= review.author.username %></h6>
+                  <p class="starability-result mb-1" data-rating="<%= review.rating %>"></p>
+                  <p class="text-muted mb-0"><%= review.comment %></p>
+                </div>
+                <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+                  <div class="card-footer bg-transparent border-0 pt-0">
+                    <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                      <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash me-1"></i>Delete</button>
+                    </form>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- RIGHT COLUMN: Booking Box -->
+    <div class="col-lg-5">
+      <div class="booking-box">
+        <div class="mb-3">
+          <span class="price">&#8377;<%= listing.price.toLocaleString("en-IN") %></span>
+          <span class="text-muted"> / night</span>
+        </div>
+
+        <% if (currUser) { %>
+          <form method="POST" action="/bookings/<%= listing._id %>">
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-semibold">CHECK-IN</label>
+                <input type="date" class="form-control" name="checkIn" id="checkIn" required
+                  min="<%= new Date().toISOString().split('T')[0] %>" />
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-semibold">CHECK-OUT</label>
+                <input type="date" class="form-control" name="checkOut" id="checkOut" required />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">GUESTS</label>
+              <select class="form-select" name="guests">
+                <% for (let i = 1; i <= 10; i++) { %>
+                  <option value="<%= i %>"><%= i %> Guest<%= i > 1 ? 's' : '' %></option>
+                <% } %>
+              </select>
+            </div>
+            <div id="price-summary" class="mb-3 p-3 bg-light rounded" style="display:none;">
+              <div class="d-flex justify-content-between mb-1">
+                <span id="nights-text"></span>
+                <span id="nights-price"></span>
+              </div>
+              <hr class="my-2" />
+              <div class="d-flex justify-content-between fw-bold">
+                <span>Total</span>
+                <span id="total-price" class=.text-primary-violet"></span>
+              </div>
+            </div>
+            <button type="submit" class="btn-book">
+              <i class="fa-solid fa-calendar-check me-2"></i> Book Now
+            </button>
+          </form>
+          <p class="text-center text-muted small mt-3">You won't be charged yet</p>
+          <hr />
+          <div class="text-center">
+            <form method="POST" action="/wishlist/<%= listing._id %>">
+              <button style="background:none;border:none;color:<%= wishlisted ? '#6C63FF' : '#888' %>;cursor:pointer;font-size:0.9rem;">
+                <i class="<%= wishlisted ? 'fa-solid' : 'fa-regular' %> fa-heart me-1"></i>
+                <%= wishlisted ? 'Remove from Wishlist' : 'Save to Wishlist' %>
+              </button>
+            </form>
+          </div>
+        <% } else { %>
+          <div class="alert alert-light border text-center">
+            <p class="mb-2">Login to book this listing</p>
+            <a href="/login" class="btn btn-danger btn-sm">Login to Book</a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const pricePerNight = <%= listing.price %>;
+  const checkInInput = document.getElementById("checkIn");
+  const checkOutInput = document.getElementById("checkOut");
+  function updatePrice() {
+    const ci = new Date(checkInInput.value);
+    const co = new Date(checkOutInput.value);
+    if (checkInInput.value && checkOutInput.value && co > ci) {
+      const nights = Math.ceil((co - ci) / (1000*60*60*24));
+      const total = nights * pricePerNight;
+      document.getElementById("nights-text").textContent = "₹" + pricePerNight.toLocaleString("en-IN") + " × " + nights + " night" + (nights>1?"s":"");
+      document.getElementById("nights-price").textContent = "₹" + total.toLocaleString("en-IN");
+      document.getElementById("total-price").textContent = "₹" + total.toLocaleString("en-IN");
+      document.getElementById("price-summary").style.display = "block";
+    } else {
+      document.getElementById("price-summary").style.display = "none";
+    }
+  }
+  if(checkInInput) {
+    checkInInput.addEventListener("change", () => { if(checkOutInput.value && checkOutInput.value < checkInInput.value) checkOutInput.value=""; checkOutInput.min=checkInInput.value; updatePrice(); });
+    checkOutInput.addEventListener("change", updatePrice);
+  }
+</script>

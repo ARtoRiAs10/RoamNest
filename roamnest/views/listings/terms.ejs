@@ -1,0 +1,347 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* ── Hero ── */
+  .terms-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    margin: 0 -12px;
+  }
+  .terms-hero h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .terms-hero p  { opacity: 0.82; font-size: 1.05rem; }
+
+  /* ── TOC ── */
+  .toc-card {
+    position: sticky; top: 80px;
+    background: #fff; border: 1px solid #eee;
+    border-radius: 14px; padding: 1.4rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .toc-card h6 { font-weight: 700; color: #444; margin-bottom: 1rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .toc-card a {
+    display: block; padding: 6px 10px; border-radius: 8px;
+    color: #555; text-decoration: none; font-size: 0.84rem;
+    transition: all 0.2s; margin-bottom: 2px;
+  }
+  .toc-card a:hover { background: #f0eeff; color: #6C63FF; padding-left: 14px; }
+
+  /* ── Body ── */
+  .terms-body { padding: 2.5rem 0 4rem; }
+  .terms-section {
+    background: #fff; border: 1px solid #eee;
+    border-radius: 16px; padding: 2rem 2.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .terms-section:hover { box-shadow: 0 4px 20px rgba(108,99,255,0.08); }
+  .section-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, #6C63FF22, #3ECFCF22);
+    color: #6C63FF; font-size: 1.1rem; margin-bottom: 0.9rem;
+  }
+  .terms-section h4 { font-weight: 700; font-size: 1.1rem; color: #222; margin-bottom: 0.8rem; }
+  .terms-section p, .terms-section li { color: #555; font-size: 0.93rem; line-height: 1.75; }
+  .terms-section ul { padding-left: 1.2rem; }
+  .terms-section ul li { margin-bottom: 0.45rem; }
+  .terms-section ol { padding-left: 1.2rem; }
+  .terms-section ol li { margin-bottom: 0.45rem; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #f0eeff, #e6fafa);
+    border-left: 4px solid #6C63FF; border-radius: 0 10px 10px 0;
+    padding: 1rem 1.4rem; margin: 1rem 0;
+    font-size: 0.9rem; color: #444;
+  }
+  .warning-box {
+    background: #fff8e1; border-left: 4px solid #FFC107;
+    border-radius: 0 10px 10px 0; padding: 1rem 1.4rem;
+    margin: 1rem 0; font-size: 0.9rem; color: #5a4a00;
+  }
+  .badge-pill {
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    color: white; border-radius: 20px; padding: 3px 12px;
+    font-size: 0.75rem; font-weight: 600; margin-left: 8px; vertical-align: middle;
+  }
+  .effective-banner {
+    background: #f8f9fa; border-radius: 12px;
+    padding: 1rem 1.5rem; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.88rem; color: #666; border: 1px solid #eee;
+  }
+  .effective-banner i { color: #6C63FF; font-size: 1.1rem; }
+
+  /* Role cards */
+  .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .role-card {
+    border: 1px solid #eee; border-radius: 12px; padding: 1.2rem;
+    text-align: center;
+  }
+  .role-card i { font-size: 1.6rem; margin-bottom: 0.5rem; display: block; }
+  .role-card.guest i { color: #3ECFCF; }
+  .role-card.host i  { color: #6C63FF; }
+  .role-card h6 { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.9rem; }
+  .role-card p { font-size: 0.81rem; color: #666; margin: 0; }
+
+  .contact-card {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: white; border-radius: 16px;
+    padding: 2rem; text-align: center; margin-top: 1rem;
+  }
+  .contact-card a { color: #3ECFCF; font-weight: 700; }
+
+  @media (max-width: 576px) { .role-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- Hero -->
+<div class="terms-hero">
+  <div class="section-icon mx-auto mb-3" style="background:rgba(255,255,255,0.15); color:white; width:56px; height:56px; font-size:1.5rem;">
+    <i class="fa-solid fa-scale-balanced"></i>
+  </div>
+  <h1>Terms & Conditions</h1>
+  <p>The rules that govern your use of the RoamNest platform</p>
+</div>
+
+<div class="container terms-body">
+  <div class="row">
+
+    <!-- TOC -->
+    <div class="col-lg-3 d-none d-lg-block">
+      <div class="toc-card">
+        <h6>On this page</h6>
+        <a href="#acceptance">Acceptance of Terms</a>
+        <a href="#definitions">Definitions</a>
+        <a href="#eligibility">Eligibility</a>
+        <a href="#accounts">User Accounts</a>
+        <a href="#guest-conduct">Guest Conduct</a>
+        <a href="#host-conduct">Host Obligations</a>
+        <a href="#bookings">Bookings & Payments</a>
+        <a href="#cancellations">Cancellations</a>
+        <a href="#content">User Content</a>
+        <a href="#prohibited">Prohibited Activities</a>
+        <a href="#ip">Intellectual Property</a>
+        <a href="#liability">Limitation of Liability</a>
+        <a href="#governing">Governing Law</a>
+        <a href="#changes">Changes to Terms</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+
+      <div class="effective-banner">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span><strong>Effective Date:</strong> March 1, 2025 &nbsp;·&nbsp; <strong>Last Updated:</strong> January 1, 2026 &nbsp;·&nbsp; Jurisdiction: Republic of India</span>
+      </div>
+
+      <!-- 1 -->
+      <div class="terms-section" id="acceptance">
+        <div class="section-icon"><i class="fa-solid fa-handshake"></i></div>
+        <h4>1. Acceptance of Terms</h4>
+        <p>These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User", "Guest", or "Host") and <strong>RoamNest Pvt. Ltd.</strong> ("RoamNest", "Company", "we", "us").</p>
+        <p>By accessing, browsing, registering, or making any use of the RoamNest platform — including its website, mobile application, and related services — you confirm that you have read, understood, and agree to be bound by these Terms and our <a href="/privacy" style="color:#6C63FF;">Privacy Policy</a>.</p>
+        <div class="warning-box">
+          <i class="fa-solid fa-triangle-exclamation me-2" style="color:#FFC107;"></i>
+          <strong>If you do not agree to these Terms, you must not access or use RoamNest.</strong>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="terms-section" id="definitions">
+        <div class="section-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h4>2. Definitions</h4>
+        <ul>
+          <li><strong>"Platform"</strong> — The RoamNest website, mobile app, APIs, and all associated services.</li>
+          <li><strong>"Host"</strong> — A registered user who creates and publishes a property listing on the Platform.</li>
+          <li><strong>"Guest"</strong> — A registered user who searches for, saves, or books a property listing.</li>
+          <li><strong>"Listing"</strong> — A property or accommodation published on the Platform by a Host.</li>
+          <li><strong>"Booking"</strong> — A confirmed reservation made by a Guest for a Listing.</li>
+          <li><strong>"User Content"</strong> — Text, images, reviews, and other content submitted by users.</li>
+          <li><strong>"RoamNest Content"</strong> — All other content, including the logo, interface design, and software.</li>
+        </ul>
+      </div>
+
+      <!-- 3 -->
+      <div class="terms-section" id="eligibility">
+        <div class="section-icon"><i class="fa-solid fa-id-card"></i></div>
+        <h4>3. Eligibility</h4>
+        <p>To use RoamNest, you must:</p>
+        <ul>
+          <li>Be at least <strong>18 years of age</strong>.</li>
+          <li>Be legally capable of entering into a binding contract under the laws of India (<em>Indian Contract Act, 1872</em>).</li>
+          <li>Not have been previously suspended or removed from the Platform.</li>
+          <li>Not be a person barred from using the Platform under applicable laws.</li>
+        </ul>
+        <p>By using the Platform, you represent and warrant that you meet all of the above eligibility requirements.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="terms-section" id="accounts">
+        <div class="section-icon"><i class="fa-solid fa-user-circle"></i></div>
+        <h4>4. User Accounts</h4>
+        <ul>
+          <li>You must create an account with a unique username and secure password to access most Platform features.</li>
+          <li>You are solely responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</li>
+          <li>You must notify us immediately at <strong>support@roamnest.com</strong> if you suspect unauthorised access to your account.</li>
+          <li>You may not create multiple accounts, share your account, or impersonate another person.</li>
+          <li>We reserve the right to suspend or terminate accounts that violate these Terms, without prior notice.</li>
+        </ul>
+        <div class="highlight-box">
+          Your username may be publicly visible on listings and reviews you create. Choose a username you're comfortable sharing.
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="terms-section" id="guest-conduct">
+        <div class="section-icon"><i class="fa-solid fa-person-walking-luggage"></i></div>
+        <h4>5. Guest Conduct</h4>
+        <div class="role-grid mb-3">
+          <div class="role-card guest">
+            <i class="fa-solid fa-circle-check"></i>
+            <h6>Guests May</h6>
+            <p>Browse, search, save to wishlist, book listed properties, and leave genuine reviews after a stay.</p>
+          </div>
+          <div class="role-card" style="border-color:#ffcccc;">
+            <i class="fa-solid fa-circle-xmark" style="color:#e74c3c;"></i>
+            <h6>Guests Must Not</h6>
+            <p>Spam reviews, make fake bookings, misrepresent the number of guests, or damage property.</p>
+          </div>
+        </div>
+        <p>Guests agree to treat Hosts and their properties with respect. Any disputes between Guests and Hosts regarding property damage, misrepresentation, or conduct shall be resolved directly between the parties; RoamNest is not liable for such disputes.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="terms-section" id="host-conduct">
+        <div class="section-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <h4>6. Host Obligations</h4>
+        <p>As a Host, you represent and warrant that:</p>
+        <ul>
+          <li>You have the legal right to list and rent the property (as owner, authorised agent, or with landlord consent).</li>
+          <li>Your listing accurately describes the property — including location, amenities, pricing, and photographs.</li>
+          <li>You comply with all applicable local laws, zoning rules, tax regulations, and any homeowners' association rules.</li>
+          <li>The property is safe, clean, and fit for habitation for the booked period.</li>
+          <li>You will honour confirmed bookings unless cancelled within the Platform's cancellation policy.</li>
+        </ul>
+        <div class="warning-box">
+          <i class="fa-solid fa-triangle-exclamation me-2" style="color:#FFC107;"></i>
+          RoamNest does not verify the accuracy of listing information. Hosts are solely responsible for the accuracy of their listings.
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="terms-section" id="bookings">
+        <div class="section-icon"><i class="fa-solid fa-calendar-check"></i></div>
+        <h4>7. Bookings & Payments <span class="badge-pill">Important</span></h4>
+        <ul>
+          <li>A Booking is confirmed when the Guest completes the booking form and receives a confirmation flash message.</li>
+          <li>The price displayed per night is set by the Host and is exclusive of applicable taxes unless otherwise stated.</li>
+          <li>RoamNest currently facilitates booking records and does not process live payments. Any financial settlement between Guest and Host occurs off-platform.</li>
+          <li>RoamNest is not responsible for payment disputes between Guests and Hosts.</li>
+          <li>Booking data (dates, guests, total) is stored in our database and visible to both the Guest and the Host of the listing.</li>
+        </ul>
+      </div>
+
+      <!-- 8 -->
+      <div class="terms-section" id="cancellations">
+        <div class="section-icon"><i class="fa-solid fa-ban"></i></div>
+        <h4>8. Cancellations & Refunds</h4>
+        <ul>
+          <li>Guests may cancel a booking through the <strong>My Bookings</strong> page at any time before the check-in date.</li>
+          <li>Cancellation policies and refund terms are set by the Host and displayed on the Listing page.</li>
+          <li>RoamNest does not guarantee refunds and is not responsible for refund disputes.</li>
+          <li>Hosts who repeatedly cancel confirmed bookings may have their listings suspended.</li>
+        </ul>
+        <div class="highlight-box">
+          Default cancellation policy: Guests may cancel up to <strong>48 hours before check-in</strong> for a full refund (subject to Host agreement). Always confirm cancellation terms directly with the Host.
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="terms-section" id="content">
+        <div class="section-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <h4>9. User Content</h4>
+        <p>When you submit content to RoamNest (listing descriptions, photos, reviews), you:</p>
+        <ul>
+          <li>Represent that you own or have the necessary rights to submit such content.</li>
+          <li>Grant RoamNest a non-exclusive, royalty-free, worldwide licence to display, reproduce, and distribute such content on the Platform.</li>
+          <li>Agree not to submit false, misleading, offensive, or defamatory content.</li>
+          <li>Understand that RoamNest may remove any content that violates these Terms, at its sole discretion.</li>
+        </ul>
+        <p>Reviews must reflect a genuine first-hand experience. Fake, incentivised, or retaliatory reviews are strictly prohibited.</p>
+      </div>
+
+      <!-- 10 -->
+      <div class="terms-section" id="prohibited">
+        <div class="section-icon"><i class="fa-solid fa-octagon-exclamation"></i></div>
+        <h4>10. Prohibited Activities</h4>
+        <p>You must not use RoamNest to:</p>
+        <ul>
+          <li>Engage in any unlawful activity or violate any applicable Indian or international law.</li>
+          <li>Upload malware, viruses, or any harmful code to the Platform.</li>
+          <li>Attempt to gain unauthorised access to other accounts, our servers, or databases.</li>
+          <li>Scrape, crawl, or harvest data from the Platform without express written permission.</li>
+          <li>Post listings for illegal properties, or properties you have no right to rent.</li>
+          <li>Harass, threaten, or discriminate against any other user.</li>
+          <li>Circumvent or manipulate pricing, reviews, or the booking system.</li>
+          <li>Impersonate RoamNest, its employees, or other users.</li>
+        </ul>
+        <p>Violations may result in immediate account suspension and, where appropriate, legal action.</p>
+      </div>
+
+      <!-- 11 -->
+      <div class="terms-section" id="ip">
+        <div class="section-icon"><i class="fa-solid fa-copyright"></i></div>
+        <h4>11. Intellectual Property</h4>
+        <p>All RoamNest Content — including the brand name <strong>"RoamNest"</strong>, the 🪺 logo, website design, software code, and written content — is the exclusive property of <strong>RoamNest Pvt. Ltd.</strong> and is protected under the <em>Copyright Act, 1957</em> and the <em>Trade Marks Act, 1999</em>.</p>
+        <p>You may not reproduce, distribute, modify, or create derivative works from RoamNest Content without our express written consent. Violation of our intellectual property rights may result in civil and/or criminal action.</p>
+      </div>
+
+      <!-- 12 -->
+      <div class="terms-section" id="liability">
+        <div class="section-icon"><i class="fa-solid fa-shield-xmark"></i></div>
+        <h4>12. Limitation of Liability</h4>
+        <p>To the fullest extent permitted by applicable law:</p>
+        <ul>
+          <li>RoamNest provides the Platform on an <strong>"as-is" and "as-available"</strong> basis, without any warranties of merchantability, fitness for a particular purpose, or non-infringement.</li>
+          <li>RoamNest is a marketplace and is <strong>not a party to any agreement</strong> between Guests and Hosts. We are not responsible for the quality, safety, legality, or suitability of any listing.</li>
+          <li>RoamNest is not liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the Platform.</li>
+          <li>Our total aggregate liability to you shall not exceed <strong>₹5,000</strong> in any 12-month period.</li>
+        </ul>
+        <div class="warning-box">
+          <i class="fa-solid fa-triangle-exclamation me-2" style="color:#FFC107;"></i>
+          Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such cases, our liability will be limited to the maximum extent permitted by law.
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="terms-section" id="governing">
+        <div class="section-icon"><i class="fa-solid fa-landmark-flag"></i></div>
+        <h4>13. Governing Law & Dispute Resolution</h4>
+        <p>These Terms are governed by and construed in accordance with the laws of the <strong>Republic of India</strong>. Any disputes arising from or relating to these Terms or your use of RoamNest shall be subject to the exclusive jurisdiction of the courts of <strong>Mumbai, Maharashtra</strong>.</p>
+        <p>Before initiating legal proceedings, both parties agree to attempt resolution through good-faith negotiation for at least <strong>30 days</strong>. Disputes that remain unresolved may be referred to arbitration under the <em>Arbitration and Conciliation Act, 1996</em>.</p>
+      </div>
+
+      <!-- 14 -->
+      <div class="terms-section" id="changes">
+        <div class="section-icon"><i class="fa-solid fa-rotate"></i></div>
+        <h4>14. Changes to These Terms</h4>
+        <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the <strong>"Last Updated"</strong> date at the top of this page and, where required by law, notify registered users by email or via an in-app notice.</p>
+        <p>Your continued use of the Platform after the effective date of any changes constitutes your acceptance of the revised Terms. If you disagree with the new Terms, you must stop using RoamNest and may delete your account.</p>
+      </div>
+
+      <!-- Contact -->
+      <div class="contact-card" id="contact">
+        <i class="fa-solid fa-gavel mb-2" style="font-size:1.8rem;"></i>
+        <h5 class="fw-bold">Questions About These Terms?</h5>
+        <p class="mb-1" style="opacity:0.9;">Our legal team is happy to help clarify any part of these Terms.</p>
+        <p class="mb-2">📧 <a href="mailto:legal@roamnest.com">legal@roamnest.com</a></p>
+        <p class="mb-0" style="opacity:0.75; font-size:0.82rem;">RoamNest Pvt. Ltd. · Mumbai, Maharashtra, India · Response within 5 business days</p>
+      </div>
+
+    </div>
+  </div>
+</div>

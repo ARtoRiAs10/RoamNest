@@ -1,0 +1,285 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* ── Page Hero ── */
+  .policy-hero {
+    background: linear-gradient(135deg, #6C63FF 0%, #3ECFCF 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .policy-hero h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .policy-hero p  { opacity: 0.88; font-size: 1.05rem; margin-bottom: 0; }
+
+  /* ── Sidebar TOC ── */
+  .toc-card {
+    position: sticky;
+    top: 80px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .toc-card h6 { font-weight: 700; color: #444; margin-bottom: 1rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .toc-card a {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin-bottom: 2px;
+  }
+  .toc-card a:hover { background: #f0eeff; color: #6C63FF; padding-left: 14px; }
+
+  /* ── Content ── */
+  .policy-body { padding: 2.5rem 0 4rem; }
+  .policy-section {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .policy-section:hover { box-shadow: 0 4px 20px rgba(108,99,255,0.1); }
+  .section-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6C63FF22, #3ECFCF22);
+    color: #6C63FF;
+    font-size: 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+  .policy-section h4 { font-weight: 700; font-size: 1.1rem; color: #222; margin-bottom: 0.8rem; }
+  .policy-section p, .policy-section li { color: #555; font-size: 0.93rem; line-height: 1.75; }
+  .policy-section ul { padding-left: 1.2rem; }
+  .policy-section ul li { margin-bottom: 0.4rem; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #f0eeff, #e6fafa);
+    border-left: 4px solid #6C63FF;
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.4rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #444;
+  }
+
+  .badge-pill {
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    color: white;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .effective-banner {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #666;
+    border: 1px solid #eee;
+  }
+  .effective-banner i { color: #6C63FF; font-size: 1.1rem; }
+
+  .contact-card {
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .contact-card a { color: white; font-weight: 700; text-decoration: underline; }
+</style>
+
+<!-- Hero -->
+<div class="policy-hero" style="margin: 0 -12px;">
+  <div class="section-icon mx-auto mb-3" style="background:rgba(255,255,255,0.2); color:white; width:56px; height:56px; font-size:1.5rem;">
+    <i class="fa-solid fa-shield-halved"></i>
+  </div>
+  <h1>Privacy Policy</h1>
+  <p>How RoamNest collects, uses, and protects your information</p>
+</div>
+
+<div class="container policy-body">
+  <div class="row">
+
+    <!-- Sidebar TOC -->
+    <div class="col-lg-3 d-none d-lg-block">
+      <div class="toc-card">
+        <h6>On this page</h6>
+        <a href="#overview">Overview</a>
+        <a href="#data-collected">Data We Collect</a>
+        <a href="#how-we-use">How We Use It</a>
+        <a href="#data-sharing">Data Sharing</a>
+        <a href="#cookies">Cookies</a>
+        <a href="#data-security">Data Security</a>
+        <a href="#your-rights">Your Rights</a>
+        <a href="#children">Children's Privacy</a>
+        <a href="#third-party">Third-Party Links</a>
+        <a href="#changes">Policy Changes</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+
+      <div class="effective-banner">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span><strong>Effective Date:</strong> March 1, 2025 &nbsp;·&nbsp; <strong>Last Updated:</strong> January 1, 2026 &nbsp;·&nbsp; Applies to all RoamNest users worldwide.</span>
+      </div>
+
+      <!-- 1 -->
+      <div class="policy-section" id="overview">
+        <div class="section-icon"><i class="fa-solid fa-eye"></i></div>
+        <h4>1. Overview</h4>
+        <p>Welcome to <strong>RoamNest Pvt. Ltd.</strong> ("RoamNest", "we", "us", or "our"). We operate the RoamNest platform — a travel listing and booking service at <strong>roamnest.com</strong> and its subdomains.</p>
+        <p>This Privacy Policy explains what personal data we collect when you visit or use our platform, why we collect it, how we use it, and the choices you have regarding your information. By accessing or using RoamNest, you agree to this policy.</p>
+        <div class="highlight-box">
+          <i class="fa-solid fa-circle-info me-2" style="color:#6C63FF;"></i>
+          <strong>Short version:</strong> We collect only what we need to run the platform. We never sell your personal data. You're always in control.
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="policy-section" id="data-collected">
+        <div class="section-icon"><i class="fa-solid fa-database"></i></div>
+        <h4>2. Data We Collect <span class="badge-pill">Key</span></h4>
+        <p>We collect the following categories of data:</p>
+        <ul>
+          <li><strong>Account Information:</strong> Username and encrypted password when you create an account.</li>
+          <li><strong>Listing Data:</strong> Property title, description, location, price, category, and uploaded images when you create a listing.</li>
+          <li><strong>Booking Data:</strong> Check-in/check-out dates, guest count, and total price when you make a booking.</li>
+          <li><strong>Wishlist Data:</strong> Listings you save to your wishlist, linked to your account.</li>
+          <li><strong>Review Data:</strong> Star ratings and comments you submit on listings.</li>
+          <li><strong>Usage Data:</strong> IP address, browser type, pages visited, and referral source — collected automatically via server logs.</li>
+          <li><strong>Session Data:</strong> Encrypted session tokens stored in cookies to keep you logged in.</li>
+        </ul>
+        <p>We do <strong>not</strong> collect payment card numbers, government IDs, or sensitive financial data. All payments (if applicable) are handled by third-party processors under their own privacy policies.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="policy-section" id="how-we-use">
+        <div class="section-icon"><i class="fa-solid fa-gears"></i></div>
+        <h4>3. How We Use Your Data</h4>
+        <p>Your data is used exclusively to provide and improve the RoamNest service:</p>
+        <ul>
+          <li>To authenticate your account and maintain your session securely.</li>
+          <li>To display and manage listings, reviews, bookings, and wishlists associated with your account.</li>
+          <li>To send you confirmation messages related to your bookings (if email is enabled).</li>
+          <li>To detect and prevent fraud, abuse, or misuse of the platform.</li>
+          <li>To analyse usage patterns and improve platform performance (using anonymised data only).</li>
+          <li>To comply with legal obligations applicable in India and other jurisdictions.</li>
+        </ul>
+        <p>We do <strong>not</strong> use your data for advertising, profiling, or automated decision-making.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="policy-section" id="data-sharing">
+        <div class="section-icon"><i class="fa-solid fa-share-nodes"></i></div>
+        <h4>4. Data Sharing</h4>
+        <p>We do <strong>not sell, rent, or trade</strong> your personal data to any third party. We may share limited data in the following circumstances:</p>
+        <ul>
+          <li><strong>Service Providers:</strong> Cloudinary (image hosting), MongoDB Atlas (database), and our cloud hosting provider — all under strict data processing agreements.</li>
+          <li><strong>Between Users:</strong> Your public username is shown on listings you own and reviews you post. No other personal data is publicly visible.</li>
+          <li><strong>Legal Requirements:</strong> We may disclose data if required by Indian law, a court order, or a government authority under the <em>Information Technology Act, 2000</em> or the <em>DPDP Act, 2023</em>.</li>
+          <li><strong>Business Transfer:</strong> If RoamNest is acquired or merged, data may transfer to the new entity under the same protections.</li>
+        </ul>
+      </div>
+
+      <!-- 5 -->
+      <div class="policy-section" id="cookies">
+        <div class="section-icon"><i class="fa-solid fa-cookie-bite"></i></div>
+        <h4>5. Cookies & Session Storage</h4>
+        <p>RoamNest uses <strong>essential cookies only</strong> — no advertising or tracking cookies:</p>
+        <ul>
+          <li><strong>Session Cookie:</strong> Keeps you logged in during your browser session. Expires after 7 days of inactivity.</li>
+          <li><strong>Flash Cookie:</strong> Stores temporary success/error messages (cleared immediately after display).</li>
+        </ul>
+        <p>You can disable cookies in your browser settings, but this will prevent you from logging in or making bookings.</p>
+        <div class="highlight-box">
+          We do <strong>not</strong> use Google Analytics, Facebook Pixel, or any third-party tracking scripts.
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="policy-section" id="data-security">
+        <div class="section-icon"><i class="fa-solid fa-lock"></i></div>
+        <h4>6. Data Security</h4>
+        <p>We take reasonable technical and organisational measures to protect your data:</p>
+        <ul>
+          <li>Passwords are <strong>hashed with bcrypt</strong> — we never store plain-text passwords.</li>
+          <li>Session secrets are encrypted and stored in MongoDB with AES encryption.</li>
+          <li>All data transmission uses <strong>HTTPS/TLS</strong> in production.</li>
+          <li>Database access is restricted to authenticated servers only — never publicly accessible.</li>
+          <li>Uploaded images are stored on Cloudinary's secure CDN infrastructure.</li>
+        </ul>
+        <p>No system is 100% secure. If you believe your account has been compromised, please contact us immediately.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="policy-section" id="your-rights">
+        <div class="section-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <h4>7. Your Rights <span class="badge-pill">DPDP Act 2023</span></h4>
+        <p>Under India's <em>Digital Personal Data Protection Act, 2023</em>, you have the right to:</p>
+        <ul>
+          <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+          <li><strong>Correction:</strong> Request that inaccurate data be corrected.</li>
+          <li><strong>Erasure:</strong> Request deletion of your account and associated data.</li>
+          <li><strong>Nomination:</strong> Nominate a person to exercise your rights in the event of your death or incapacity.</li>
+          <li><strong>Grievance Redressal:</strong> File a complaint with our Data Protection Officer (details below).</li>
+        </ul>
+        <p>To exercise any of these rights, email us at <strong>privacy@roamnest.com</strong>. We will respond within <strong>30 days</strong>.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="policy-section" id="children">
+        <div class="section-icon"><i class="fa-solid fa-child"></i></div>
+        <h4>8. Children's Privacy</h4>
+        <p>RoamNest is not directed at children under the age of <strong>18</strong>. We do not knowingly collect personal data from minors. If we discover that a user under 18 has created an account, we will delete it promptly. If you believe a minor has registered, please notify us at <strong>privacy@roamnest.com</strong>.</p>
+      </div>
+
+      <!-- 9 -->
+      <div class="policy-section" id="third-party">
+        <div class="section-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        <h4>9. Third-Party Links</h4>
+        <p>RoamNest may contain links to external websites (e.g., social media profiles in the footer). We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites. We encourage you to review the privacy policy of every site you visit.</p>
+      </div>
+
+      <!-- 10 -->
+      <div class="policy-section" id="changes">
+        <div class="section-icon"><i class="fa-solid fa-rotate"></i></div>
+        <h4>10. Changes to This Policy</h4>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal reasons. When we make material changes, we will update the <strong>"Last Updated"</strong> date at the top of this page. Continued use of RoamNest after changes are posted constitutes your acceptance of the revised policy.</p>
+      </div>
+
+      <!-- Contact -->
+      <div class="contact-card" id="contact">
+        <i class="fa-solid fa-envelope-open-text mb-2" style="font-size:1.8rem;"></i>
+        <h5 class="fw-bold">Contact Our Data Protection Officer</h5>
+        <p class="mb-1" style="opacity:0.9;">Questions about your data or this policy? We're here to help.</p>
+        <p class="mb-2" style="opacity:0.9;">📧 <a href="mailto:privacy@roamnest.com">privacy@roamnest.com</a></p>
+        <p class="mb-0" style="opacity:0.8; font-size:0.82rem;">RoamNest Pvt. Ltd., India · Response within 30 business days</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .bookings-header {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .booking-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .booking-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .booking-img {
+    width: 180px;
+    height: 100%;
+    object-fit: cover;
+  }
+  .status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .status-confirmed { background: #d4edda; color: #155724; }
+  .status-pending   { background: #fff3cd; color: #856404; }
+  .status-cancelled { background: #f8d7da; color: #721c24; }
+  .price-tag {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fe424d;
+  }
+  .date-chip {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 4rem;
+  }
+  .empty-state i {
+    font-size: 5rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="container mt-4">
+  <div class="bookings-header">
+    <h2><i class="fa-solid fa-calendar-check me-2"></i> My Bookings</h2>
+    <p class="mb-0 opacity-75">Manage your upcoming and past stays</p>
+  </div>
+
+  <% if (bookings.length === 0) { %>
+    <div class="empty-state">
+      <i class="fa-solid fa-calendar-xmark"></i>
+      <h4 class="text-muted">No bookings yet</h4>
+      <p class="text-muted">Find your perfect destination and make your first booking!</p>
+      <a href="/listings" class="btn btn-danger mt-2">
+        <i class="fa-solid fa-compass me-1"></i> Explore Listings
+      </a>
+    </div>
+  <% } else { %>
+    <p class="text-muted mb-3"><%= bookings.length %> booking<%= bookings.length > 1 ? 's' : '' %></p>
+    
+    <% for (let booking of bookings) { %>
+      <% if (booking.listing) { %>
+      <div class="booking-card card">
+        <div class="row g-0">
+          <div class="col-md-3">
+            <img src="<%= booking.listing.image.url %>" class="booking-img w-100 h-100" alt="listing" />
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h5 class="fw-bold mb-1">
+                    <a href="/listings/<%= booking.listing._id %>" class="text-dark text-decoration-none">
+                      <%= booking.listing.title %>
+                    </a>
+                  </h5>
+                  <p class="text-muted mb-2">
+                    <i class="fa-solid fa-location-dot me-1"></i>
+                    <%= booking.listing.location %>, <%= booking.listing.country %>
+                  </p>
+                </div>
+                <span class="status-badge status-<%= booking.status %>">
+                  <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                </span>
+              </div>
+
+              <div class="mb-2">
+                <span class="date-chip">
+                  <i class="fa-solid fa-plane-arrival me-1 text-success"></i>
+                  Check-in: <strong><%= new Date(booking.checkIn).toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" }) %></strong>
+                </span>
+                <span class="date-chip">
+                  <i class="fa-solid fa-plane-departure me-1 text-danger"></i>
+                  Check-out: <strong><%= new Date(booking.checkOut).toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" }) %></strong>
+                </span>
+                <span class="date-chip">
+                  <i class="fa-solid fa-users me-1 text-primary"></i>
+                  Guests: <strong><%= booking.guests %></strong>
+                </span>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price-tag">₹<%= booking.totalPrice.toLocaleString("en-IN") %> total</div>
+                
+                <% if (booking.status !== "cancelled") { %>
+                  <form method="POST" action="/bookings/<%= booking._id %>/cancel" onsubmit="return confirm('Cancel this booking?');">
+                    <button class="btn btn-sm btn-outline-danger">
+                      <i class="fa-solid fa-xmark me-1"></i> Cancel
+                    </button>
+                  </form>
+                <% } else { %>
+                  <span class="text-muted fst-italic">Booking cancelled</span>
+                <% } %>
+              </div>
+
+              <p class="text-muted mt-2 mb-0" style="font-size:0.78rem;">
+                Booked on <%= new Date(booking.createdAt).toLocaleDateString("en-IN") %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    <% } %>
+  <% } %>
+</div>

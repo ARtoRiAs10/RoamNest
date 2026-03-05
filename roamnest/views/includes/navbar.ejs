@@ -1,0 +1,88 @@
+<style>
+  .navbar { padding: 0.8rem 1.5rem; }
+  .navbar-brand {
+    font-size: 1.7rem; font-weight: 800; 
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex; align-items: center; gap: 10px;
+    transition: transform 0.3s;
+    text-decoration: none;
+  }
+  .navbar-brand:hover { transform: scale(1.04); }
+  .brand-logo-svg { width: 34px; height: 34px; flex-shrink: 0; }
+  .search-container { flex-grow: 1; display: flex; justify-content: center; }
+  .search-input { border-radius: 25px; padding: 0.5rem 1rem; width: 280px; border: 1px solid #ddd; }
+  .btn-search {
+    background: linear-gradient(135deg, #6C63FF, #3ECFCF);
+    color: white; border-radius: 25px; padding: 0.5rem 1.2rem;
+    border: none; margin-left: 8px; transition: 0.3s; font-weight: 600;
+  }
+  .btn-search:hover { opacity: 0.88; }
+  .nav-right { display: flex; align-items: center; gap: 18px; margin-top: 10px; justify-content: flex-end; flex-wrap: nowrap; white-space: nowrap; }
+  .nav-link { font-weight: 400; color: #333; display: flex; align-items: center; gap: 6px; transition: color 0.3s ease-in-out; text-decoration: none; }
+  .nav-link:hover { color: #6C63FF; }
+  .nav-icon { font-size: 1.1rem; flex-shrink: 0; }
+  @media (max-width: 992px) {
+    .search-input { width: 180px; }
+    .nav-right { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 15px; }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings">
+      <svg class="brand-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#6C63FF"/>
+            <stop offset="100%" style="stop-color:#3ECFCF"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="48" fill="url(#nav-grad)"/>
+        <path d="M22 62 Q50 82 78 62" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M28 54 Q50 71 72 54" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="50" cy="33" r="11" fill="white"/>
+        <path d="M50 44 L44 56 Q50 62 56 56 Z" fill="white"/>
+        <circle cx="50" cy="33" r="5" fill="url(#nav-grad)"/>
+      </svg>
+      RoamNest
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse w-100" id="navbarNav">
+      <div class="search-container">
+        <form class="d-flex" role="search" action="/listings/search" method="get">
+          <input class="form-control search-input" type="search" placeholder="Search destinations..." name="q" />
+          <button class="btn btn-search" type="submit"><i class="fa fa-search"></i> Search</button>
+        </form>
+      </div>
+      <div class="navbar-nav nav-right ms-auto">
+        <a class="nav-link" href="/listings/new">
+          <i class="fa-solid fa-plus nav-icon"></i> List your space
+        </a>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/wishlist">
+            <i class="fa-solid fa-heart nav-icon" style="color:#6C63FF;"></i> Wishlist
+          </a>
+          <a class="nav-link" href="/bookings/my">
+            <i class="fa-solid fa-calendar-check nav-icon"></i> My Bookings
+          </a>
+          <a class="nav-link" href="/logout">
+            <i class="fa-solid fa-person-walking-arrow-right nav-icon"></i> Log Out
+          </a>
+        <% } else { %>
+          <a class="nav-link" href="/signup">
+            <i class="fa-solid fa-user-plus nav-icon"></i> Sign Up
+          </a>
+          <a class="nav-link" href="/login">
+            <i class="fa-solid fa-right-to-bracket nav-icon"></i> Login
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

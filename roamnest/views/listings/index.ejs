@@ -1,0 +1,171 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- <h3>All Listing</h3> -->
+<!-- <form method="GET" action="/listings/new">
+            <button>Create new listing</button>
+        </form> -->
+<div id="filters">
+  <div class="scrollable-tabs-container">
+    <div class="left-arrow">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5 8.25 12l7.5-7.5"
+        />
+      </svg>
+    </div>
+    <div class="filter-container">
+      <a class="filter active" href="/listings">
+        <div><i class="fa-solid fa-globe"></i></div>
+        <p>All</p>
+      </a>
+      <a class="filter" href="/listings/filter/Beaches">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Beaches</p>
+      </a>
+      <a class="filter" href="/listings/filter/City Lofts">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>City Lofts</p>
+      </a>
+      <a class="filter" href="/listings/filter/Mountains">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+      </a>
+      <a class="filter" href="/listings/filter/Treehouses">
+        <div><i class="fa-solid fa-tree"></i></div>
+        <p>Treehouses</p>
+      </a>
+      <a class="filter" href="/listings/filter/Luxury Villas">
+        <div><i class="fa-solid fa-gem"></i></div>
+        <p>Luxury Villas</p>
+      </a>
+      <a class="filter" href="/listings/filter/Heritage Homes">
+        <div><i class="fa-solid fa-landmark"></i></div>
+        <p>Heritage</p>
+      </a>
+      <a class="filter" href="/listings/filter/Desert Stays">
+        <div><i class="fa-solid fa-sun"></i></div>
+        <p>Desert</p>
+      </a>
+      <a class="filter" href="/listings/filter/Island Getaways">
+        <div><i class="fa-solid fa-water"></i></div>
+        <p>Islands</p>
+      </a>
+      <a class="filter" href="/listings/filter/Farm Stays">
+        <div><i class="fa-solid fa-seedling"></i></div>
+        <p>Farm Stays</p>
+      </a>
+      <a class="filter" href="/listings/filter/Arctic & Snow">
+        <div><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic & Snow</p>
+      </a>
+    </div>
+    <div class="right-arrow active">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="{1.5}"
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="m8.25 4.5 7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <div class="tax-toggle d-flex align-items-center gap-3 flex-wrap">
+    <div class="form-check-reverse form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+    </div>
+    <!-- Price Range Filter -->
+    <form action="/listings/search" method="GET" class="d-flex align-items-center gap-2" style="margin-left: auto;">
+      <label style="font-size:0.85rem; font-weight:600; white-space:nowrap;">💰 Max Price:</label>
+      <input type="number" name="q" id="priceRange" class="form-control form-control-sm" style="width:100px; border-radius:20px;" placeholder="e.g. 5000" min="0" />
+      <button class="btn btn-sm btn-danger" style="border-radius:20px; padding: 4px 14px; font-size:0.82rem;" type="submit">Filter</button>
+    </form>
+  </div>
+</div>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+ <% for(let listing of allListings) { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link text-decoration-none">
+    <div class="card col listing-card rounded-0 border shadow-sm">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top img-fluid rounded-0"
+        alt="listing_image"
+        style="height: 20rem; object-fit: cover;"
+      />
+      <div class="card-body">
+        <p class="card-text mb-0">
+          <b><%= listing.title %></b><br />
+          &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+          <i class="tax-info">&nbsp;&nbsp; +18% GST</i>
+        </p>
+      </div>
+    </div>
+  </a>
+<% } %>
+
+
+<!-- Add Your Listing card at the end -->
+<a href="/listings/new" class="text-decoration-none">
+  <div class="card col listing-card border shadow-sm d-flex justify-content-center align-items-center bg-light"
+       style="height: 20rem; transition: all 0.3s ease; border-radius: 1rem;">
+    <div class="text-center">
+      <!-- Styled Add Button like the Screenshot -->
+      <div class="d-flex justify-content-center align-items-center mx-auto mb-3"
+           style="width: 100px; height: 100px; background-color: #ff4757; color: white; border-radius: 50%; font-size: 2.5rem;">
+        +
+      </div>
+      <h5 class="text-dark mb-2 fw-semibold">Add Your Listing</h5>
+      <p class="text-muted">Click here to list your property</p>
+    </div>
+  </div>
+</a>
+
+
+
+</div>
+<script>
+  // Tax toggle functionality
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (let info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+
+  // Scrollable tabs arrow functionality
+  const leftArrow = document.querySelector(".left-arrow");
+  const rightArrow = document.querySelector(".right-arrow");
+  const filterContainer = document.querySelector(".filter-container");
+
+  if (leftArrow && rightArrow && filterContainer) {
+    rightArrow.addEventListener("click", () => {
+      filterContainer.scrollBy({ left: 200, behavior: "smooth" });
+    });
+
+    leftArrow.addEventListener("click", () => {
+      filterContainer.scrollBy({ left: -200, behavior: "smooth" });
+    });
+  }
+</script>
